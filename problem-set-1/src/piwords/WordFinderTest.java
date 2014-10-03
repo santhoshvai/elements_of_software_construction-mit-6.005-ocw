@@ -22,7 +22,6 @@ public class WordFinderTest {
                                                               needles));
     }
 
-    // TODO: Write more tests (Problem 4.a)
     @Test
     public void noHits() {
     	String haystack = "abcde";

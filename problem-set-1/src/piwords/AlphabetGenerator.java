@@ -55,7 +55,6 @@ public class AlphabetGenerator {
      */
     public static char[] generateFrequencyAlphabet(int base,
                                                    String[] trainingData) {
-        // TODO: Implement (Problem 5.b)
     	if ( base < 0 ) return null;
     	Map<Character,Integer> map = new TreeMap<Character,Integer>(); // treemap is sorted based on keys
     	int total_num_chars = 0;

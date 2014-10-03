@@ -19,7 +19,6 @@ public class DigitsToStringConverterTest {
                              input, 4, alphabet));
     }
 
-    // TODO: Write more tests (Problem 3.a)
     @Test
     public void largeDigitNumberSerializerTest() {
     	int[] input = {0, 1, -1, 3};
