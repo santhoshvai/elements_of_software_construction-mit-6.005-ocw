@@ -6,15 +6,14 @@ import javax.sound.midi.MidiUnavailableException;
 
 import midi.Instrument;
 import midi.Midi;
-import music.NoteEvent;
 import music.Pitch;
 
 public class PianoMachine {
 	
 	private Midi midi;
-	private Instrument instrument = Midi.DEFAULT_INSTRUMENT;
-	private int semiTonesShift = 0;
-	private boolean recording = false;
+	private static Instrument instrument = Midi.DEFAULT_INSTRUMENT;
+	private static int semiTonesShift = 0;
+	private static boolean recording = false;
 	/**
 	 * constructor for PianoMachine.
 	 * 
@@ -89,20 +88,20 @@ public class PianoMachine {
     /**
      * Plays back each note that has been played since recording
      *  was switched on via toggleRecording()
-     *  Used code from: http://goo.gl/DPoB9w
+     *  Used code from: http://goo.gl/DPoB9w, but this code also tracks change of instruments
      *  TIP: check regx at http://www.javarepl.com/console.html
      */
     protected void playback() {	
-    	if ( recording ) {
+    	if (recording) {
     		String history = midi.history();
     		midi.clearHistory();
     		if (history.length() == 0) return;
     		String[] token = history.split("\\s+");
     		for (String str : token) {
     			String[] split = str.split("[(),]");
-    			if (split[0].equals("on")) midi.beginNote(Integer.valueOf(split[1]));
+    			if (split[0].equals("on")) beginNote( new Pitch(Integer.valueOf(split[1]) - 60));
     			else if (split[0].equals("wait")) Midi.wait(Integer.valueOf(split[1]));
-    			else if (split[0].equals("off")) midi.endNote(Integer.valueOf(split[1]));
+    			else if (split[0].equals("off")) endNote( new Pitch(Integer.valueOf(split[1]) - 60));
     		}
     	}
     }

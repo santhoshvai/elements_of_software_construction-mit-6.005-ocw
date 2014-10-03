@@ -20,6 +20,8 @@ import music.Pitch;
 public class PianoApplet extends Applet {
 
     private static final long serialVersionUID = -580070854133088915L;
+    private static long playbackTime = 0L;
+    private static long playbackTimeEnd = 0L;
 
     public void init() {
     	setBackground(Color.green);
@@ -32,6 +34,7 @@ public class PianoApplet extends Applet {
         // when a key is pressed in the GUI
     	addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
+            	if (e.getWhen() > playbackTime && e.getWhen() < playbackTimeEnd) return; // problem 5
             	System.out.println("key pressed");
                 char key = (char) e.getKeyCode();
                 switch (key) {
@@ -67,6 +70,7 @@ public class PianoApplet extends Applet {
                     return;
                 case 'p':
                 case 'P':
+                	playbackTime = System.currentTimeMillis();
                     piano.playback();
                     return;
                 case 'i':
@@ -87,6 +91,7 @@ public class PianoApplet extends Applet {
 
         addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
+            	if (e.getWhen() > playbackTime && e.getWhen() < playbackTimeEnd) return;
             	System.out.println("key released");
                 char key = (char) e.getKeyCode();
                 switch (key) {
@@ -109,6 +114,9 @@ public class PianoApplet extends Applet {
                     return;
                 case '=':
                     piano.endNote(new Pitch(11));
+                    return;
+                case 'P':
+                	playbackTimeEnd = System.currentTimeMillis();
                     return;
                 }
             }
