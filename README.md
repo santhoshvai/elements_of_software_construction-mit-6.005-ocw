@@ -1,5 +1,5 @@
-Elements of Software Construction - MIT OCW - Fall 2011
-========================================================
+Elements of Software Construction - MIT 6.005 OCW  - Fall 2011
+================================================================
 
 - [x] [Problem set 1: Pi poetry](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-005-elements-of-software-construction-fall-2011/assignments/MIT6_005F11_ps1.pdf)
     - [X] problem 1
